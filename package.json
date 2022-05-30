@@ -4,7 +4,7 @@
   "description": "Framework nodejs + typescript permettant de développer des applications js côté serveur.",
   "scripts": {
     "compile": "tsc --watch",
-    "compile:test": "tsc --config tsconfig.test.json",
+    "compile:test": "tsc --project tsconfig.test.json",
     "run_test:hot": "nodemon tests/js/run.test.js",
     "run_test": "node tests/js/run.test.js"
   },
