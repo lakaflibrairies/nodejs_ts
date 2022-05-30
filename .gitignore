@@ -1,0 +1,19 @@
+# Folders
+
+node_modules
+prod
+build
+dev
+.history
+.vscode
+.idea
+
+
+# Files
+
+package-lock.json
+
+
+# Configuration files
+.env
+*/env.?s

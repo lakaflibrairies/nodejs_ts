@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "ES6",
+    "esModuleInterop": true,
+    "outDir": "js",
+    "target": "ES6",
+    "strict": false,
+    "moduleResolution": "Node",
+    "baseUrl": "."
+  },
+  "include": ["ts/**/*"],
+  "exclude": [
+    "node_modules",
+    "js/**/*"
+  ]
+}

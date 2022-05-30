@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "ES6",
+    "esModuleInterop": true,
+    "outDir": "tests/js",
+    "target": "ES6",
+    "strict": false,
+    "baseUrl": "."
+  },
+  "include": ["tests/ts/**/*"],
+  "exclude": [
+    "node_modules",
+    "js/**/*",
+  ]
+}
