@@ -1,10 +1,15 @@
-import express from "express";
-import LakafAbstract from "./LakafAbstract";
-import env from "../../env";
-export default class LakafApplication extends LakafAbstract {
-    constructor(config) {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const LakafAbstract_1 = __importDefault(require("./LakafAbstract"));
+const env_1 = __importDefault(require("../../env"));
+class LakafApplication extends LakafAbstract_1.default {
+    constructor(config = env_1.default.config) {
         super();
-        this.application = express();
+        this.application = express_1.default();
         this.initApplication();
         if (config && config.corsConfig) {
             this.injectCorsSecurity(config.corsConfig);
@@ -20,10 +25,12 @@ export default class LakafApplication extends LakafAbstract {
     get app() {
         return this.application;
     }
+    /** @private */
     initApplication() {
-        this.application.use(express.json());
-        this.application.use(express.urlencoded({ extended: true }));
+        this.application.use(express_1.default.json());
+        this.application.use(express_1.default.urlencoded({ extended: true }));
     }
+    /** @private */
     injectCorsSecurity(corsConfig) {
         this.application.use((req, res, next) => {
             if (Object.keys(corsConfig).length > 0) {
@@ -36,6 +43,7 @@ export default class LakafApplication extends LakafAbstract {
             next();
         });
     }
+    /** @private */
     setXPoweredHeader(by) {
         this.application.use((req, res, next) => {
             res.set({ "X-Powered-By": by });
@@ -44,16 +52,16 @@ export default class LakafApplication extends LakafAbstract {
     }
     setStaticStorage(storagePath, storeFolders) {
         for (let key in storeFolders) {
-            this.application.use(key, express.static(`${storagePath}/${storeFolders[key]}`));
+            this.application.use(key, express_1.default.static(`${storagePath}/${storeFolders[key]}`));
         }
     }
     setCustomStorage(storageConfig) {
         for (let key in storageConfig) {
             if (storageConfig[key].middleware && storageConfig[key].middleware.length !== 0) {
-                this.application.use(key, ...storageConfig[key].middleware, express.static(storageConfig[key].folder));
+                this.application.use(key, ...storageConfig[key].middleware, express_1.default.static(storageConfig[key].folder));
             }
             else {
-                this.application.use(key, express.static(storageConfig[key].folder));
+                this.application.use(key, express_1.default.static(storageConfig[key].folder));
             }
         }
     }
@@ -62,7 +70,7 @@ export default class LakafApplication extends LakafAbstract {
         this.application.set("view-engine", engine);
     }
     injectRouting(base, routing) {
-        if (env.maintenance === "disabled") {
+        if (env_1.default.maintenance === "disabled") {
             this.application.use(base, routing.design());
         }
         else {
@@ -72,3 +80,4 @@ export default class LakafApplication extends LakafAbstract {
         }
     }
 }
+exports.default = LakafApplication;

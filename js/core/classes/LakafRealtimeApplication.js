@@ -1,5 +1,10 @@
-import LakafAbstract from "./LakafAbstract";
-export default class LakafRealtimeApplication extends LakafAbstract {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const LakafAbstract_1 = __importDefault(require("./LakafAbstract"));
+class LakafRealtimeApplication extends LakafAbstract_1.default {
     constructor(app, socketRouting, options) {
         super();
         this.allowedEvents = [];
@@ -24,6 +29,7 @@ export default class LakafRealtimeApplication extends LakafAbstract {
     disconnection(socket) {
         console.log("Socket disconnect !!");
     }
+    /** @private */
     listenBeforeConnection() {
         if (this.beforeConnection.length === 0)
             return;
@@ -35,6 +41,7 @@ export default class LakafRealtimeApplication extends LakafAbstract {
             });
         });
     }
+    /** @private */
     listenInsideConnection() {
         if (this.insideConnection.length === 0)
             return;
@@ -74,6 +81,7 @@ export default class LakafRealtimeApplication extends LakafAbstract {
         this.socket.broadcast.emit(name, callback(data));
         return this;
     }
+    /** @private */
     injectSocketRouting(socketRouting) {
         socketRouting.exportJournal().forEach((route) => {
             if (!route.name || !route.controller) {
@@ -85,3 +93,4 @@ export default class LakafRealtimeApplication extends LakafAbstract {
         });
     }
 }
+exports.default = LakafRealtimeApplication;

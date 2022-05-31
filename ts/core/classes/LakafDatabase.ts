@@ -17,6 +17,7 @@ export default class LakafDatabase extends LakafAbstract {
     this.start();
   }
 
+  /** @private */
   private onConnection(error) {
     if (error) {
       console.error("Fail to connect to database.");

@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const cameroonianPhone = {
     isMTNNumber(value) {
         return /^2376(5[0-4]|7[0-9]|80)[0-9]{6}$/.test(String(value));
@@ -18,4 +20,4 @@ const cameroonianPhone = {
             cameroonianPhone.isMTNNumber(value));
     },
 };
-export default cameroonianPhone;
+exports.default = cameroonianPhone;

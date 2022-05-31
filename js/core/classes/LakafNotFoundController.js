@@ -1,5 +1,10 @@
-import LakafBaseController from "./LakafBaseController";
-class NotFoundController extends LakafBaseController {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const LakafBaseController_1 = __importDefault(require("./LakafBaseController"));
+class NotFoundController extends LakafBaseController_1.default {
     constructor() {
         super();
     }
@@ -8,4 +13,4 @@ class NotFoundController extends LakafBaseController {
     }
 }
 const LakafNotFoundController = new NotFoundController();
-export default LakafNotFoundController;
+exports.default = LakafNotFoundController;

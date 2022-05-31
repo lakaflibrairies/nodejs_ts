@@ -5,9 +5,10 @@ import LakafAbstract from "./LakafAbstract";
 import env from "../../env";
 
 export default class LakafApplication extends LakafAbstract {
+  /** @readonly */
   readonly application: Express;
 
-  constructor(config?: Config) {
+  constructor(config: Config = env.config) {
     super();
     this.application = express();
 
@@ -31,11 +32,13 @@ export default class LakafApplication extends LakafAbstract {
     return this.application;
   }
 
+  /** @private */
   private initApplication(): void {
     this.application.use(express.json());
     this.application.use(express.urlencoded({ extended: true }));
   }
 
+  /** @private */
   private injectCorsSecurity(corsConfig: Json) {
     this.application.use((req: Request, res: Response, next: NextFunction) => {
       if (Object.keys(corsConfig).length > 0) {
@@ -49,6 +52,7 @@ export default class LakafApplication extends LakafAbstract {
     });
   }
 
+  /** @private */
   private setXPoweredHeader(by: string): void {
     this.application.use((req: Request, res: Response, next: NextFunction) => {
       res.set({ "X-Powered-By": by });

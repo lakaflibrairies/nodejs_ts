@@ -1,5 +1,10 @@
-import LakafAbstract from "./LakafAbstract";
-export default class LakafSocketRouting extends LakafAbstract {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const LakafAbstract_1 = __importDefault(require("./LakafAbstract"));
+class LakafSocketRouting extends LakafAbstract_1.default {
     constructor() {
         super(...arguments);
         this.registeredSocketRouting = [];
@@ -33,3 +38,4 @@ export default class LakafSocketRouting extends LakafAbstract {
         return this;
     }
 }
+exports.default = LakafSocketRouting;

@@ -12,6 +12,7 @@ export default class LakafBaseService extends LakafAbstract {
     super();
   }
 
+  /** @protected */
   protected formatDateTime(data: {
     toFormat: Date;
     separator?: string;
@@ -32,6 +33,7 @@ export default class LakafBaseService extends LakafAbstract {
     );
   }
 
+  /** @protected */
   protected sendCodeByMail(
     to: string,
     title: string,
@@ -52,6 +54,7 @@ export default class LakafBaseService extends LakafAbstract {
     });
   }
 
+  /** @protected */
   protected sendResetPasswordCodeByMail(
     to: string,
     title: string,
@@ -72,10 +75,12 @@ export default class LakafBaseService extends LakafAbstract {
     });
   }
 
+  /** @protected */
   protected extractAndDecodeToken(authorization: string): any {
     return this.jwt.decode(this.helpers.auth.extractToken(authorization));
   }
 
+  /** @protected */
   protected computedTotalPages(totalItems: number, itemsPerPage: number) {
     const rest: number = totalItems % itemsPerPage;
     const dividing: number = totalItems - rest;

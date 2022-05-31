@@ -1,5 +1,10 @@
-import LakafBaseRequest from "./LakafBaseRequest";
-export default class LakafRequest extends LakafBaseRequest {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const LakafBaseRequest_1 = __importDefault(require("./LakafBaseRequest"));
+class LakafRequest extends LakafBaseRequest_1.default {
     constructor(rules, urlRules, checkIntruders = true) {
         super(rules, urlRules, checkIntruders);
     }
@@ -34,3 +39,4 @@ export default class LakafRequest extends LakafBaseRequest {
         return [req, res, validation];
     }
 }
+exports.default = LakafRequest;

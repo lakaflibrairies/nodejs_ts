@@ -1,15 +1,21 @@
-import { createConnection } from "mysql";
-import LakafAbstract from "./LakafAbstract";
-import env from "../../env";
-export default class LakafDatabase extends LakafAbstract {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mysql_1 = require("mysql");
+const LakafAbstract_1 = __importDefault(require("./LakafAbstract"));
+const env_1 = __importDefault(require("../../env"));
+class LakafDatabase extends LakafAbstract_1.default {
     constructor() {
         super();
-        if (!env.dbConfig) {
+        if (!env_1.default.dbConfig) {
             console.error("No database configuration has not been provided in env.* file");
             return;
         }
         this.start();
     }
+    /** @private */
     onConnection(error) {
         if (error) {
             console.error("Fail to connect to database.");
@@ -22,7 +28,7 @@ export default class LakafDatabase extends LakafAbstract {
         return this.engine;
     }
     start() {
-        this.engine = createConnection(env.dbConfig);
+        this.engine = mysql_1.createConnection(env_1.default.dbConfig);
         this.engine.connect(this.onConnection);
     }
     stop() {
@@ -33,3 +39,4 @@ export default class LakafDatabase extends LakafAbstract {
         this.start();
     }
 }
+exports.default = LakafDatabase;

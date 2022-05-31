@@ -1,4 +1,6 @@
-export default class LakafAbstractResourceController {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class LakafAbstractResourceController {
     index(req, res) { }
     create(req, res) { }
     store(req, res) { }
@@ -7,3 +9,4 @@ export default class LakafAbstractResourceController {
     update(req, res) { }
     destroy(req, res) { }
 }
+exports.default = LakafAbstractResourceController;

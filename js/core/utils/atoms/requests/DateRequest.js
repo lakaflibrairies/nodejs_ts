@@ -1,5 +1,10 @@
-import LakafRequest from "../../../classes/LakafRequest";
-export default class DateRequest extends LakafRequest {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const LakafRequest_1 = __importDefault(require("../../../classes/LakafRequest"));
+class DateRequest extends LakafRequest_1.default {
     constructor() {
         super({
             date_field: {
@@ -28,3 +33,4 @@ export default class DateRequest extends LakafRequest {
         });
     }
 }
+exports.default = DateRequest;

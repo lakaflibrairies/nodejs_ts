@@ -14,6 +14,7 @@ export default class LakafMiddleware extends LakafAbstract {
     super();
   }
 
+  /** @protected */
   protected useIt(
     criteriaFunction: LakafCriteriaFunction,
     responseOnFail?: Json | string

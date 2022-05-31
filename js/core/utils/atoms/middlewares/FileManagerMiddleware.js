@@ -1,13 +1,19 @@
-import LakafMiddleware from "../../../classes/LakafMiddleware";
-import multer from "multer";
-import env from "../../../../env";
-export default class FileManagerMiddleware extends LakafMiddleware {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const LakafMiddleware_1 = __importDefault(require("../../../classes/LakafMiddleware"));
+const multer_1 = __importDefault(require("multer"));
+const env_1 = __importDefault(require("../../../../env"));
+class FileManagerMiddleware extends LakafMiddleware_1.default {
     constructor(allowedStrategies) {
         super();
         this.allowedStrategies = allowedStrategies;
-        this.storageConfig = env.storageConfig;
-        this.uploadConfig = env.uploadConfig;
+        this.storageConfig = env_1.default.storageConfig;
+        this.uploadConfig = env_1.default.uploadConfig;
     }
+    /** @protected */
     mimeTypeToDestinationFolder(mt, cb) {
         let [nature, type] = mt.split("/"), destinationFolder = this.storageConfig.other.folder;
         if (this.allowedStrategies.includes(nature)) {
@@ -25,8 +31,9 @@ export default class FileManagerMiddleware extends LakafMiddleware {
         }
         return destinationFolder;
     }
+    /** @protected */
     storage(nature, cb) {
-        return multer.diskStorage({
+        return multer_1.default.diskStorage({
             destination: (req, file, callback) => {
                 callback(null, this.mimeTypeToDestinationFolder(file.mimetype, cb));
             },
@@ -43,6 +50,7 @@ export default class FileManagerMiddleware extends LakafMiddleware {
             },
         });
     }
+    /** @protected */
     fileFilter(nature, sizeLimit, errorMessage, fileTypeValidator) {
         if (!fileTypeValidator.hasOwnProperty(nature)) {
             return (req, file, callback) => {
@@ -63,8 +71,9 @@ export default class FileManagerMiddleware extends LakafMiddleware {
             return callback(null, true);
         };
     }
+    /** @protected */
     generateUploader(nature, sizeLimit, uploadType, fileTypeValidator, errorMessages) {
-        const uploader = multer({
+        const uploader = multer_1.default({
             storage: this.storage(nature),
             fileFilter: this.fileFilter(nature, sizeLimit, errorMessages[nature], fileTypeValidator),
         });
@@ -75,3 +84,4 @@ export default class FileManagerMiddleware extends LakafMiddleware {
         return uploader.single("file");
     }
 }
+exports.default = FileManagerMiddleware;

@@ -1,20 +1,20 @@
 {
-  "name": "lakaflibrairies/nodejs_ts",
-  "version": "1.0.0",
+  "name": "@van_lakaf/nodejs_ts",
+  "version": "1.0.1",
   "description": "Framework nodejs + typescript permettant de développer des applications js côté serveur.",
   "scripts": {
     "compile": "tsc --watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/van_lakaf/lakafit.base-code.cm/backend/nodejs_ts.git"
+    "url": "git+https://github.com/lakaflibrairies/nodejs_ts.git"
   },
   "author": "Vaneck KAFFO",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/van_lakaf/lakafit.base-code.cm/backend/nodejs_ts/issues"
+    "url": "https://github.com/lakaflibrairies/nodejs_ts/issues"
   },
-  "homepage": "https://gitlab.com/van_lakaf/lakafit.base-code.cm/backend/nodejs_ts#readme",
+  "homepage": "https://github.com/lakaflibrairies/nodejs_ts#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",

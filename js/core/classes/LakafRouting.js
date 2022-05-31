@@ -1,6 +1,11 @@
-import { Router } from "express";
-import LakafAbstract from "./LakafAbstract";
-import LakafNotFoundController from "./LakafNotFoundController";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const LakafAbstract_1 = __importDefault(require("./LakafAbstract"));
+const LakafNotFoundController_1 = __importDefault(require("./LakafNotFoundController"));
 /**
  *  ** To create a routing object, just declare a variable or constant which contains an instance of LakafRouting like this
  *
@@ -159,10 +164,10 @@ import LakafNotFoundController from "./LakafNotFoundController";
  *  NB: using controller means that you instantiated it long before...
  *
  */
-export default class LakafRouting extends LakafAbstract {
+class LakafRouting extends LakafAbstract_1.default {
     constructor() {
         super();
-        this.router = Router();
+        this.router = express_1.Router();
     }
     _get(brick, middlewares, controller) {
         this.router.get(brick, ...middlewares, controller);
@@ -269,7 +274,8 @@ export default class LakafRouting extends LakafAbstract {
         return this;
     }
     design() {
-        this.router.use("/*", LakafNotFoundController.response);
+        this.router.use("/*", LakafNotFoundController_1.default.response);
         return this.router;
     }
 }
+exports.default = LakafRouting;

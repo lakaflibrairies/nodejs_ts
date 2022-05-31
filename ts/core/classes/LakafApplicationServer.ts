@@ -16,14 +16,12 @@ export default class LakafApplicationServer extends LakafAbstract {
   private socketRouting: LakafSocketRouting<Record<string, any>>;
 
   constructor(
-    port: number,
-    host: string,
     system: LakafApplication,
     socketRouting?: LakafSocketRouting<Record<string, any>>
   ) {
     super();
-    this.port = port;
-    this.host = host;
+    this.port = env.PORT;
+    this.host = env.HOST;
     this.system = system;
     if (!!socketRouting) {
       this.socketRouting = socketRouting;
@@ -82,6 +80,7 @@ export default class LakafApplicationServer extends LakafAbstract {
     return this.system;
   }
 
+  /** @private */
   private registerAsRTAServer(): void {
     if (!this.socketRouting) {
       console.log("No socket routing provided");

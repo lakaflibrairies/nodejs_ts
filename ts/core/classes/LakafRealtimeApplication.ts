@@ -1,3 +1,4 @@
+
 import http from "http";
 import https from "https";
 import { Server, ServerOptions, Socket } from "socket.io";
@@ -53,6 +54,7 @@ export default class LakafRealtimeApplication extends LakafAbstract {
     console.log("Socket disconnect !!");
   }
 
+  /** @private */
   private listenBeforeConnection(): void {
     if (this.beforeConnection.length === 0) return;
 
@@ -65,6 +67,7 @@ export default class LakafRealtimeApplication extends LakafAbstract {
     });
   }
 
+  /** @private */
   private listenInsideConnection(): void {
     if (this.insideConnection.length === 0) return;
 
@@ -126,6 +129,7 @@ export default class LakafRealtimeApplication extends LakafAbstract {
     return this;
   }
 
+  /** @private */
   private injectSocketRouting(
     socketRouting: LakafSocketRouting<Record<string, any>>
   ): void {

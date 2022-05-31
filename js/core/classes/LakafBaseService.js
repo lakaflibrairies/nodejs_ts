@@ -1,14 +1,39 @@
-import * as bcrypt from "bcryptjs";
-import { verify, decode, sign } from "jsonwebtoken";
-import env from "../../env";
-import LakafAbstract from "./LakafAbstract";
-export default class LakafBaseService extends LakafAbstract {
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const bcrypt = __importStar(require("bcryptjs"));
+const jsonwebtoken_1 = require("jsonwebtoken");
+const env_1 = __importDefault(require("../../env"));
+const LakafAbstract_1 = __importDefault(require("./LakafAbstract"));
+class LakafBaseService extends LakafAbstract_1.default {
     constructor() {
         super();
-        this.jwtKey = env.jwtKey;
+        this.jwtKey = env_1.default.jwtKey;
         this.crypt = bcrypt;
-        this.jwt = { decode, sign, verify };
+        this.jwt = { decode: jsonwebtoken_1.decode, sign: jsonwebtoken_1.sign, verify: jsonwebtoken_1.verify };
     }
+    /** @protected */
     formatDateTime(data) {
         const { toFormat, separator = "-" } = data;
         return (toFormat.getUTCFullYear() +
@@ -23,6 +48,7 @@ export default class LakafBaseService extends LakafAbstract {
             ":" +
             ("0" + toFormat.getUTCSeconds()).slice(-2));
     }
+    /** @protected */
     sendCodeByMail(to, title, code) {
         return new Promise((resolve, reject) => {
             this.helpers
@@ -38,6 +64,7 @@ export default class LakafBaseService extends LakafAbstract {
             });
         });
     }
+    /** @protected */
     sendResetPasswordCodeByMail(to, title, code) {
         return new Promise((resolve, reject) => {
             this.helpers
@@ -53,12 +80,15 @@ export default class LakafBaseService extends LakafAbstract {
             });
         });
     }
+    /** @protected */
     extractAndDecodeToken(authorization) {
         return this.jwt.decode(this.helpers.auth.extractToken(authorization));
     }
+    /** @protected */
     computedTotalPages(totalItems, itemsPerPage) {
         const rest = totalItems % itemsPerPage;
         const dividing = totalItems - rest;
         return rest === 0 ? dividing / itemsPerPage : 1 + dividing / itemsPerPage;
     }
 }
+exports.default = LakafBaseService;

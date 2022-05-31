@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,13 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { verify, decode, sign } from "jsonwebtoken";
-import LakafAbstract from "./LakafAbstract";
-export default class LakafMiddleware extends LakafAbstract {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const jsonwebtoken_1 = require("jsonwebtoken");
+const LakafAbstract_1 = __importDefault(require("./LakafAbstract"));
+class LakafMiddleware extends LakafAbstract_1.default {
     constructor() {
         super();
-        this.jwt = { decode, sign, verify };
+        this.jwt = { decode: jsonwebtoken_1.decode, sign: jsonwebtoken_1.sign, verify: jsonwebtoken_1.verify };
     }
+    /** @protected */
     useIt(criteriaFunction, responseOnFail) {
         return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             if (yield criteriaFunction(req, res)) {
@@ -33,3 +39,4 @@ export default class LakafMiddleware extends LakafAbstract {
         });
     }
 }
+exports.default = LakafMiddleware;

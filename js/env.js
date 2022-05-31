@@ -1,13 +1,18 @@
-import { findProcessModeFromCommand } from "./core/utils";
-import path from "path";
-const isProduction = findProcessModeFromCommand() === "production";
-const projectFolder = path.resolve("../../../../"); // This path is calculated from this env file.
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const utils_1 = require("./core/utils");
+const path_1 = __importDefault(require("path"));
+const isProduction = utils_1.findProcessModeFromCommand() === "production";
+const projectFolder = path_1.default.resolve(__dirname, "../../../../"); // This path is calculated from this env file.
 const projectEnv = require(projectFolder + "/env");
 const defaultEnv = {
     PORT: isProduction ? 3030 : 12400,
     HOST: "localhost",
     maintenance: "disabled",
-    mode: findProcessModeFromCommand(),
+    mode: utils_1.findProcessModeFromCommand(),
     config: {
         authorizationTokenPrefix: "lakaf-token",
         useRealtime: true,
@@ -102,4 +107,4 @@ function computeEnv() {
     return Object.assign(Object.assign({}, defaultEnv), projectEnv);
 }
 const env = computeEnv();
-export default env;
+exports.default = env;

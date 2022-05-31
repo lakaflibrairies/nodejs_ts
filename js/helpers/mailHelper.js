@@ -1,7 +1,12 @@
-import env from "../env";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const env_1 = __importDefault(require("../env"));
 const nodemailer = require("nodemailer");
 function mail() {
-    const { mailConfig } = env;
+    const { mailConfig } = env_1.default;
     if (!mailConfig) {
         throw new Error("No provided mail configuration.");
     }
@@ -53,4 +58,4 @@ function mail() {
     };
     return obj;
 }
-export default mail;
+exports.default = mail;

@@ -33,6 +33,7 @@ export default class LakafBaseRequest extends LakafAbstract {
     };
   }
 
+  /** @protected */
   protected urlValidation(req: Request): ValidationReport {
     let report: ValidationReport = { success: true, message: "" };
 
@@ -73,6 +74,7 @@ export default class LakafBaseRequest extends LakafAbstract {
     return report;
   }
 
+  /** @protected */
   protected validation(req: Request): ValidationReport {
     if (this.checkIntruders) {
       let report: ValidationReport = { success: true, message: "" };
@@ -97,18 +99,22 @@ export default class LakafBaseRequest extends LakafAbstract {
     return this.bodyValidation(req);
   }
 
+  /** @private */
   private bodyValidation(req: Request): ValidationReport {
     return this.dataValidation(req);
   }
 
+  /** @private */
   private queryValidation(req: Request): ValidationReport {
     return this.dataValidation(req, "query");
   }
 
+  /** @private */
   private paramsValidation(req: Request): ValidationReport {
     return this.dataValidation(req, "params");
   }
 
+  /** @private */
   private dataValidation(
     req: Request,
     strategy: RequestStrategyType = "body"
@@ -158,6 +164,7 @@ export default class LakafBaseRequest extends LakafAbstract {
     return report;
   }
 
+  /** @private */
   private required(req: Request): ValidationReport {
     const report: ValidationReport = { success: true, message: "" };
     const requiredFields: string[] = [];
@@ -184,6 +191,7 @@ export default class LakafBaseRequest extends LakafAbstract {
     return report;
   }
 
+  /** @private */
   private numeric(
     req: Request,
     strategy: RequestStrategyType = "body"
@@ -216,6 +224,7 @@ export default class LakafBaseRequest extends LakafAbstract {
     return report;
   }
 
+  /** @private */
   private integer(
     req: Request,
     strategy: RequestStrategyType = "body"
@@ -248,6 +257,7 @@ export default class LakafBaseRequest extends LakafAbstract {
     return report;
   }
 
+  /** @private */
   private text(
     req: Request,
     strategy: RequestStrategyType = "body"
@@ -292,6 +302,7 @@ export default class LakafBaseRequest extends LakafAbstract {
     return report;
   }
 
+  /** @private */
   private min(
     req: Request,
     strategy: RequestStrategyType = "body"
@@ -328,6 +339,7 @@ export default class LakafBaseRequest extends LakafAbstract {
     return report;
   }
 
+  /** @private */
   private max(
     req: Request,
     strategy: RequestStrategyType = "body"
@@ -364,6 +376,7 @@ export default class LakafBaseRequest extends LakafAbstract {
     return report;
   }
 
+  /** @private */
   private custom(
     req: Request,
     strategy: RequestStrategyType = "body"

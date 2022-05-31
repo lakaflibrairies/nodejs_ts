@@ -1,9 +1,14 @@
-import mailTemplate from "./mailTemplateHelper";
-import phone from "./phoneHelper";
-import mail from "./mailHelper";
-import auth from "./authHelper";
-import logs from "./logsHelper";
-import customConsole from "./customConsoleHelper";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mailTemplateHelper_1 = __importDefault(require("./mailTemplateHelper"));
+const phoneHelper_1 = __importDefault(require("./phoneHelper"));
+const mailHelper_1 = __importDefault(require("./mailHelper"));
+const authHelper_1 = __importDefault(require("./authHelper"));
+const logsHelper_1 = __importDefault(require("./logsHelper"));
+const customConsoleHelper_1 = __importDefault(require("./customConsoleHelper"));
 const helpers = {
     generateKey(length) {
         var result = "";
@@ -13,11 +18,11 @@ const helpers = {
         }
         return result;
     },
-    mail,
-    phone,
-    mailTemplate,
-    auth,
-    logs,
-    customConsole
+    mail: mailHelper_1.default,
+    phone: phoneHelper_1.default,
+    mailTemplate: mailTemplateHelper_1.default,
+    auth: authHelper_1.default,
+    logs: logsHelper_1.default,
+    customConsole: customConsoleHelper_1.default
 };
-export default helpers;
+exports.default = helpers;

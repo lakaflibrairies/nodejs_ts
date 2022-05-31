@@ -4,7 +4,7 @@ import path from "path";
 
 const isProduction = findProcessModeFromCommand() === "production";
 
-const projectFolder = path.resolve("../../../../"); // This path is calculated from this env file.
+const projectFolder = path.resolve(__dirname, "../../../../"); // This path is calculated from this env file.
 
 const projectEnv = require(projectFolder + "/env") as EnvTemplate;
 

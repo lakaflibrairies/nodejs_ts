@@ -12,6 +12,7 @@ export default class FileManagerMiddleware extends LakafMiddleware {
     super();
   }
 
+  /** @protected */
   protected mimeTypeToDestinationFolder(
     mt: string,
     cb?: { (mt: string): { status: boolean; dest: string } }
@@ -38,6 +39,7 @@ export default class FileManagerMiddleware extends LakafMiddleware {
     return destinationFolder;
   }
 
+  /** @protected */
   protected storage(
     nature: string,
     cb?: { (mt: string): { status: boolean; dest: string } }
@@ -62,6 +64,7 @@ export default class FileManagerMiddleware extends LakafMiddleware {
     });
   }
 
+  /** @protected */
   protected fileFilter(
     nature: string,
     sizeLimit: number | "infinite",
@@ -100,6 +103,7 @@ export default class FileManagerMiddleware extends LakafMiddleware {
     };
   }
 
+  /** @protected */
   protected generateUploader(
     nature: string,
     sizeLimit: number | "infinite",

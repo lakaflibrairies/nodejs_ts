@@ -1,5 +1,10 @@
-import LakafAbstract from "./LakafAbstract";
-export default class LakafBaseRequest extends LakafAbstract {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const LakafAbstract_1 = __importDefault(require("./LakafAbstract"));
+class LakafBaseRequest extends LakafAbstract_1.default {
     constructor(rules, urlRules, checkIntruders = true) {
         super();
         this.checkIntruders = checkIntruders;
@@ -17,6 +22,7 @@ export default class LakafBaseRequest extends LakafAbstract {
             urlRules: this.urlRules,
         };
     }
+    /** @protected */
     urlValidation(req) {
         let report = { success: true, message: "" };
         if (Object.keys(this.urlRules).length === 0)
@@ -47,6 +53,7 @@ export default class LakafBaseRequest extends LakafAbstract {
         }
         return report;
     }
+    /** @protected */
     validation(req) {
         if (this.checkIntruders) {
             let report = { success: true, message: "" };
@@ -66,15 +73,19 @@ export default class LakafBaseRequest extends LakafAbstract {
         }
         return this.bodyValidation(req);
     }
+    /** @private */
     bodyValidation(req) {
         return this.dataValidation(req);
     }
+    /** @private */
     queryValidation(req) {
         return this.dataValidation(req, "query");
     }
+    /** @private */
     paramsValidation(req) {
         return this.dataValidation(req, "params");
     }
+    /** @private */
     dataValidation(req, strategy = "body") {
         let report = { success: true, message: "" };
         if (strategy === "body") {
@@ -106,6 +117,7 @@ export default class LakafBaseRequest extends LakafAbstract {
         report = this.custom(req, strategy);
         return report;
     }
+    /** @private */
     required(req) {
         const report = { success: true, message: "" };
         const requiredFields = [];
@@ -126,6 +138,7 @@ export default class LakafBaseRequest extends LakafAbstract {
         });
         return report;
     }
+    /** @private */
     numeric(req, strategy = "body") {
         const report = { success: true, message: "" };
         const numericFields = [];
@@ -148,6 +161,7 @@ export default class LakafBaseRequest extends LakafAbstract {
         });
         return report;
     }
+    /** @private */
     integer(req, strategy = "body") {
         const report = { success: true, message: "" };
         const integerFields = [];
@@ -170,6 +184,7 @@ export default class LakafBaseRequest extends LakafAbstract {
         });
         return report;
     }
+    /** @private */
     text(req, strategy = "body") {
         const report = { success: true, message: "" };
         const textFields = [];
@@ -201,6 +216,7 @@ export default class LakafBaseRequest extends LakafAbstract {
         });
         return report;
     }
+    /** @private */
     min(req, strategy = "body") {
         const report = { success: true, message: "" };
         const minFields = [];
@@ -225,6 +241,7 @@ export default class LakafBaseRequest extends LakafAbstract {
         });
         return report;
     }
+    /** @private */
     max(req, strategy = "body") {
         const report = { success: true, message: "" };
         const maxFields = [];
@@ -249,6 +266,7 @@ export default class LakafBaseRequest extends LakafAbstract {
         });
         return report;
     }
+    /** @private */
     custom(req, strategy = "body") {
         const report = { success: true, message: "" };
         const customFields = [];
@@ -273,3 +291,4 @@ export default class LakafBaseRequest extends LakafAbstract {
         return report;
     }
 }
+exports.default = LakafBaseRequest;

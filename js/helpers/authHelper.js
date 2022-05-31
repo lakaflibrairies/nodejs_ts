@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const auth = {
     extractToken(authorization) {
         return authorization
@@ -6,4 +8,4 @@ const auth = {
             .trim();
     },
 };
-export default auth;
+exports.default = auth;

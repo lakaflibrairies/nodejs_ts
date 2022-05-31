@@ -1,11 +1,17 @@
-import LakafBaseModel from "./LakafBaseModel";
-export default class LakafModel extends LakafBaseModel {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const LakafBaseModel_1 = __importDefault(require("./LakafBaseModel"));
+class LakafModel extends LakafBaseModel_1.default {
     constructor(tableName, template) {
         super();
         this.template = this.parseTemplate(template);
         this.tableName = tableName;
         this.fillable = this.computeFillableFields();
     }
+    /** @private */
     parseTemplate(template) {
         return template.map((item) => {
             if (item.name === "id") {
@@ -37,11 +43,13 @@ export default class LakafModel extends LakafBaseModel {
             return item;
         });
     }
+    /** @private */
     computeFillableFields() {
         return this.template
             .filter((item) => item.fillable && item.name !== "id")
             .map((item) => item.name);
     }
+    /** @private */
     validateValue(field, val) {
         const value = !val ? field.defaultValue : val;
         if (!value || value === null) {
@@ -80,6 +88,7 @@ export default class LakafModel extends LakafBaseModel {
         }
         return false;
     }
+    /** @private */
     validateEntries(entries) {
         const keysList = Object.keys(entries);
         let report = { success: true };
@@ -111,6 +120,7 @@ export default class LakafModel extends LakafBaseModel {
         });
         return report;
     }
+    /** @private */
     validateUpdateEntries(entries) {
         const keysList = Object.keys(entries);
         let report = { success: true };
@@ -133,6 +143,7 @@ export default class LakafModel extends LakafBaseModel {
         });
         return report;
     }
+    /** @private */
     fillUnfilledField() {
         const unfilled = this.template
             .filter((f) => !f.fillable && f.name !== "id")
@@ -143,6 +154,7 @@ export default class LakafModel extends LakafBaseModel {
         });
         return output;
     }
+    /** @private */
     parseEntriesToKeysAndValuesList(entries) {
         const keysList = [], valuesList = [];
         for (let k in entries) {
@@ -151,9 +163,11 @@ export default class LakafModel extends LakafBaseModel {
         }
         return { keysList, valuesList };
     }
+    /** @private */
     insertRequestBuilder(keysList) {
         return `INSERT INTO ${this.tableName} (${keysList.length === 1 ? keysList[0] : keysList.join(", ")}) VALUES (${keysList.length === 1 ? "?" : Array(keysList.length).fill("?").join(", ")});`;
     }
+    /** @private */
     selectRequestBuilder(fields, criteria) {
         const computedCondition = `${criteria.WHERE ? "WHERE " + criteria.WHERE : ""} ${criteria.ORDER_BY ? "ORDER BY " + criteria.ORDER_BY : ""} ${criteria.DESC ? "DESC " : ""} ${criteria.LIMIT ? "LIMIT " + criteria.LIMIT : ""}`;
         return `SELECT ${!Array.isArray(fields)
@@ -162,10 +176,12 @@ export default class LakafModel extends LakafBaseModel {
                 ? fields[0]
                 : fields.join(", ")} FROM ${this.tableName} ${computedCondition}`;
     }
+    /** @private */
     updateRequestBuilder(fields, criteria) {
         const templateArr = fields.map((f) => f + " = ?");
         return `UPDATE ${this.tableName} SET ${templateArr.length === 1 ? templateArr[0] : templateArr.join(", ")} WHERE ${criteria}`;
     }
+    /** @private */
     transformToCollection(data) {
         return Array.from(data);
     }
@@ -215,6 +231,7 @@ export default class LakafModel extends LakafBaseModel {
             });
         });
     }
+    /** @private */
     remove(criteria) {
         return new Promise((resolve, reject) => { });
     }
@@ -241,3 +258,4 @@ export default class LakafModel extends LakafBaseModel {
         return self;
     }
 }
+exports.default = LakafModel;

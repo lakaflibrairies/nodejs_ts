@@ -1,4 +1,9 @@
-import env from "../env";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const env_1 = __importDefault(require("../env"));
 const mailTemplate = {
     signup: {
         default(code) {
@@ -18,7 +23,7 @@ const mailTemplate = {
     <strong>${code}</strong>
     <br />
     <br />
-    À très bientôt sur <a href="${env.clientUrl}" onclick="window.open(this.href); return false;">NKOULOULOUN MARKET</a>.
+    À très bientôt sur <a href="${env_1.default.clientUrl}" onclick="window.open(this.href); return false;">NKOULOULOUN MARKET</a>.
 
 </body>
 </html>`;
@@ -42,11 +47,11 @@ const mailTemplate = {
     <strong>${code}</strong>
     <br />
     <br />
-    À très bientôt sur <a href="${env.clientUrl}" onclick="window.open(this.href); return false;">NKOULOULOUN MARKET</a>.
+    À très bientôt sur <a href="${env_1.default.clientUrl}" onclick="window.open(this.href); return false;">NKOULOULOUN MARKET</a>.
 
 </body>
 </html>`;
         }
     }
 };
-export default mailTemplate;
+exports.default = mailTemplate;
