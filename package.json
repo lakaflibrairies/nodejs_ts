@@ -1,12 +1,9 @@
 {
-  "name": "nodejs_ts_framework",
+  "name": "lakaflibrairies/nodejs_ts",
   "version": "1.0.0",
   "description": "Framework nodejs + typescript permettant de développer des applications js côté serveur.",
   "scripts": {
-    "compile": "tsc --watch",
-    "compile:test": "tsc --project tsconfig.test.json",
-    "run_test:hot": "nodemon tests/js/run.test.js",
-    "run_test": "node tests/js/run.test.js"
+    "compile": "tsc --watch"
   },
   "repository": {
     "type": "git",
