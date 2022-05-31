@@ -15,5 +15,6 @@ package-lock.json
 
 
 # Configuration files
+
 .env
-*/env.?s
+# */env.?s
