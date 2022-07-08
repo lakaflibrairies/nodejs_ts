@@ -19,12 +19,15 @@ export default class LakafApplication extends LakafAbstract {
       
     }
 
-    if (config && config.storagePath) {
-      this.setStaticStorage(config.storagePath, config.storeFolders);
-    }
-
-    if (config && config.viewConfig) {
-      this.setViews(config.viewConfig);
+    if (env.maintenance === "disabled") {
+      
+      if (config && config.storagePath) {
+        this.setStaticStorage(config.storagePath, config.storeFolders);
+      }
+      
+      if (config && config.viewConfig) {
+        this.setViews(config.viewConfig);
+      }
     }
   }
 
@@ -32,13 +35,18 @@ export default class LakafApplication extends LakafAbstract {
     return this.application;
   }
 
-  /** @private */
+  /** 
+    * @private 
+    */
   private initApplication(): void {
     this.application.use(express.json());
     this.application.use(express.urlencoded({ extended: true }));
   }
 
-  /** @private */
+  /** 
+    * @private
+    * @param { Record<string, any> } corsConfig
+    */
   private injectCorsSecurity(corsConfig: Json) {
     this.application.use((req: Request, res: Response, next: NextFunction) => {
       if (Object.keys(corsConfig).length > 0) {
@@ -52,7 +60,10 @@ export default class LakafApplication extends LakafAbstract {
     });
   }
 
-  /** @private */
+  /** 
+    * @private
+    * @param { string } by
+    */
   private setXPoweredHeader(by: string): void {
     this.application.use((req: Request, res: Response, next: NextFunction) => {
       res.set({ "X-Powered-By": by });
@@ -60,15 +71,22 @@ export default class LakafApplication extends LakafAbstract {
     });
   }
 
+  /** 
+    * @param { string } storagePath
+    * @param { Record<string, any> } storeFolders
+    */
   setStaticStorage(storagePath: string, storeFolders: Json): void {
     for (let key in storeFolders) {
       this.application.use(
-        key,
+        `/${key}`,
         express.static(`${storagePath}/${storeFolders[key]}`)
       );
     }
   }
 
+  /** 
+    * @param { StorageConfig } storageConfig
+    */
   setCustomStorage(storageConfig: StorageConfig) {
     for (let key in storageConfig) {
       if (
@@ -88,16 +106,23 @@ export default class LakafApplication extends LakafAbstract {
     }
   }
 
+  /** 
+    * @param {{ engine: string; folder: string; }} param0
+    */
   setViews({ engine, folder }: { engine: string; folder: string }): void {
     this.application.set("views", folder);
     this.application.set("view-engine", engine);
   }
 
+  /**
+    * @param { string } base
+    * @param { LakafRouting } routing
+    */
   injectRouting(base: string, routing: LakafRouting): void {
     if (env.maintenance === "disabled") {
       this.application.use(base, routing.design());
     } else {
-      this.application.get("", (req, res) => {
+      this.application.use("/*", (req, res) => {
         res.send("Maintenance Mode enabled !");
       });
     }

@@ -105,8 +105,16 @@ const defaultEnv: EnvTemplate = {
   }
 };
 
+// computeEnv is not up to date. It will enhanced perform env computing.
 function computeEnv(): EnvTemplate {
-  return { ...defaultEnv, ...projectEnv };
+  for (let key in projectEnv) {
+    if (typeof defaultEnv[key] === "object") {
+      defaultEnv[key] = { ...defaultEnv[key], ...projectEnv[key] };
+    } else {
+      defaultEnv[key] = projectEnv[key];
+    }
+  }
+  return defaultEnv;
 }
 
 const env: EnvTemplate = computeEnv();

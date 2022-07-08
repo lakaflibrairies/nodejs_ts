@@ -15,22 +15,29 @@ class LakafApplication extends LakafAbstract_1.default {
             this.injectCorsSecurity(config.corsConfig);
             this.setXPoweredHeader("LaKaf");
         }
-        if (config && config.storagePath) {
-            this.setStaticStorage(config.storagePath, config.storeFolders);
-        }
-        if (config && config.viewConfig) {
-            this.setViews(config.viewConfig);
+        if (env_1.default.maintenance === "disabled") {
+            if (config && config.storagePath) {
+                this.setStaticStorage(config.storagePath, config.storeFolders);
+            }
+            if (config && config.viewConfig) {
+                this.setViews(config.viewConfig);
+            }
         }
     }
     get app() {
         return this.application;
     }
-    /** @private */
+    /**
+      * @private
+      */
     initApplication() {
         this.application.use(express_1.default.json());
         this.application.use(express_1.default.urlencoded({ extended: true }));
     }
-    /** @private */
+    /**
+      * @private
+      * @param { Record<string, any> } corsConfig
+      */
     injectCorsSecurity(corsConfig) {
         this.application.use((req, res, next) => {
             if (Object.keys(corsConfig).length > 0) {
@@ -43,18 +50,28 @@ class LakafApplication extends LakafAbstract_1.default {
             next();
         });
     }
-    /** @private */
+    /**
+      * @private
+      * @param { string } by
+      */
     setXPoweredHeader(by) {
         this.application.use((req, res, next) => {
             res.set({ "X-Powered-By": by });
             next();
         });
     }
+    /**
+      * @param { string } storagePath
+      * @param { Record<string, any> } storeFolders
+      */
     setStaticStorage(storagePath, storeFolders) {
         for (let key in storeFolders) {
-            this.application.use(key, express_1.default.static(`${storagePath}/${storeFolders[key]}`));
+            this.application.use(`/${key}`, express_1.default.static(`${storagePath}/${storeFolders[key]}`));
         }
     }
+    /**
+      * @param { StorageConfig } storageConfig
+      */
     setCustomStorage(storageConfig) {
         for (let key in storageConfig) {
             if (storageConfig[key].middleware && storageConfig[key].middleware.length !== 0) {
@@ -65,16 +82,23 @@ class LakafApplication extends LakafAbstract_1.default {
             }
         }
     }
+    /**
+      * @param {{ engine: string; folder: string; }} param0
+      */
     setViews({ engine, folder }) {
         this.application.set("views", folder);
         this.application.set("view-engine", engine);
     }
+    /**
+      * @param { string } base
+      * @param { LakafRouting } routing
+      */
     injectRouting(base, routing) {
         if (env_1.default.maintenance === "disabled") {
             this.application.use(base, routing.design());
         }
         else {
-            this.application.get("", (req, res) => {
+            this.application.use("/*", (req, res) => {
                 res.send("Maintenance Mode enabled !");
             });
         }

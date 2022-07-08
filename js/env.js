@@ -103,8 +103,17 @@ const defaultEnv = {
         }
     }
 };
+// computeEnv is not up to date. It will enhanced perform env computing.
 function computeEnv() {
-    return Object.assign(Object.assign({}, defaultEnv), projectEnv);
+    for (let key in projectEnv) {
+        if (typeof defaultEnv[key] === "object") {
+            defaultEnv[key] = Object.assign(Object.assign({}, defaultEnv[key]), projectEnv[key]);
+        }
+        else {
+            defaultEnv[key] = projectEnv[key];
+        }
+    }
+    return defaultEnv;
 }
 const env = computeEnv();
 exports.default = env;
