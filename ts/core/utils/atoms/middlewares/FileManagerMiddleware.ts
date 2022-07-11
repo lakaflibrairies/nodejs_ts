@@ -21,7 +21,7 @@ export default class FileManagerMiddleware extends LakafMiddleware {
       destinationFolder: string = this.storageConfig.other.folder;
 
     if (this.allowedStrategies.includes(nature as AllowedFileTypes)) {
-      destinationFolder = this.storageConfig[nature].folder;
+      return  this.storageConfig[nature].folder;
     }
 
     if (!cb) {

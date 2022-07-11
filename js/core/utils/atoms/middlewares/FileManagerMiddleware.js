@@ -17,7 +17,7 @@ class FileManagerMiddleware extends LakafMiddleware_1.default {
     mimeTypeToDestinationFolder(mt, cb) {
         let [nature, type] = mt.split("/"), destinationFolder = this.storageConfig.other.folder;
         if (this.allowedStrategies.includes(nature)) {
-            destinationFolder = this.storageConfig[nature].folder;
+            return this.storageConfig[nature].folder;
         }
         if (!cb) {
             return this.storageConfig.other.folder;
