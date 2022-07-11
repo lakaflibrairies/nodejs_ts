@@ -45,51 +45,51 @@ const defaultEnv = {
     },
     storageConfig: {
         archive: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "archives"),
             middleware: []
         },
         audio: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "audios"),
             middleware: []
         },
         captcha_image: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "captcha_images"),
             middleware: []
         },
         css: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "css"),
             middleware: []
         },
         document: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "documents"),
             middleware: []
         },
         i18n: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "i18n"),
             middleware: []
         },
         image: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "images"),
             middleware: []
         },
         javascript: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "javascript"),
             middleware: []
         },
         other: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "archives"),
             middleware: []
         },
         text: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "texts"),
             middleware: []
         },
         video: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "videos"),
             middleware: []
         },
         voice: {
-            folder: "",
+            folder: path_1.default.resolve(projectFolder, "storage", "voices"),
             middleware: []
         },
     },

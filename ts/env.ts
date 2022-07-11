@@ -46,51 +46,51 @@ const defaultEnv: EnvTemplate = {
   },
   storageConfig: {
     archive: {
-      folder: "", // path.resolve(__dirname, "storage", "archives") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "archives"), // path.resolve(__dirname, "storage", "archives") for example, with __dirname corresponding to folder to use
       middleware: []
     },
     audio: {
-      folder: "", // path.resolve(__dirname, "storage", "audios") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "audios"), // path.resolve(__dirname, "storage", "audios") for example, with __dirname corresponding to folder to use
       middleware: []
     },
     captcha_image: {
-      folder: "", // path.resolve(__dirname, "storage", "captcha_images") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "captcha_images"), // path.resolve(__dirname, "storage", "captcha_images") for example, with __dirname corresponding to folder to use
       middleware: []
     },
     css: {
-      folder: "", // path.resolve(__dirname, "storage", "css") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "css"), // path.resolve(__dirname, "storage", "css") for example, with __dirname corresponding to folder to use
       middleware: []
     },
     document: {
-      folder: "", // path.resolve(__dirname, "storage", "documents") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "documents"), // path.resolve(__dirname, "storage", "documents") for example, with __dirname corresponding to folder to use
       middleware: []
     },
     i18n: {
-      folder: "", // path.resolve(__dirname, "storage", "i18nFiles") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "i18n"), // path.resolve(__dirname, "storage", "i18nFiles") for example, with __dirname corresponding to folder to use
       middleware: []
     },
     image: {
-      folder: "", // path.resolve(__dirname, "storage", "images") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "images"), // path.resolve(__dirname, "storage", "images") for example, with __dirname corresponding to folder to use
       middleware: []
     },
     javascript: {
-      folder: "", // path.resolve(__dirname, "storage", "javascript") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "javascript"), // path.resolve(__dirname, "storage", "javascript") for example, with __dirname corresponding to folder to use
       middleware: []
     },
     other: {
-      folder: "", // path.resolve(__dirname, "storage", "archives") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "archives"), // path.resolve(__dirname, "storage", "archives") for example, with __dirname corresponding to folder to use
       middleware: []
     },
     text: {
-      folder: "", // path.resolve(__dirname, "storage", "texts") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "texts"), // path.resolve(__dirname, "storage", "texts") for example, with __dirname corresponding to folder to use
       middleware: []
     },
     video: {
-      folder: "", // path.resolve(__dirname, "storage", "videos") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "videos"), // path.resolve(__dirname, "storage", "videos") for example, with __dirname corresponding to folder to use
       middleware: []
     },
     voice: {
-      folder: "", // path.resolve(__dirname, "storage", "voices") for example, with __dirname corresponding to folder to use
+      folder: path.resolve(projectFolder, "storage", "voices"), // path.resolve(__dirname, "storage", "voices") for example, with __dirname corresponding to folder to use
       middleware: []
     },
   },

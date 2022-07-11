@@ -42,7 +42,7 @@ const LakafNotFoundController_1 = __importDefault(require("./LakafNotFoundContro
  *  ```js
  *  - /users              //  (GET)       // -> index route,
  *  - /users/create       //  (GET)       // -> create route,
- *  - /users/store        //  (POST)      // -> store route,
+ *  - /users/             //  (POST)      // -> store route,
  *  - /users/:id          //  (GET)       // -> show route,
  *  - /users/:id/edit     //  (GET)       // -> edit route,
  *  - /users/:id          //  (PUT)       // -> update route,
