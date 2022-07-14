@@ -60,7 +60,7 @@ class FileManagerMiddleware extends LakafMiddleware_1.default {
         }
         return (req, file, callback) => {
             const fileSize = parseInt(req.headers["content-length"]);
-            if (fileSize > sizeLimit) {
+            if (sizeLimit !== "infinite" && fileSize > sizeLimit) {
                 req.body["multer_error"] = "Too large file...";
                 return callback(null, false);
             }

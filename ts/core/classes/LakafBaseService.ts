@@ -33,18 +33,25 @@ export default class LakafBaseService extends LakafAbstract {
     );
   }
 
-  /** @protected */
-  protected sendCodeByMail(
+  /**
+   * @protected
+   * @param { string } to
+   * @param { string } title
+   * @param { string } htmlContent
+   *
+   * @returns { Promise<any> }
+   */
+  protected sendMail(
     to: string,
     title: string,
-    code: string
+    htmlContent: string
   ): Promise<any> {
     return new Promise((resolve, reject) => {
       this.helpers
         .mail()
         .to(to)
         .subject(title)
-        .htmlContent(this.helpers.mailTemplate.signup.default(code))
+        .htmlContent(htmlContent)
         .send((error, info) => {
           if (error) {
             reject(error);
@@ -55,24 +62,29 @@ export default class LakafBaseService extends LakafAbstract {
   }
 
   /** @protected */
+  protected sendCodeByMail(
+    to: string,
+    title: string,
+    code: string
+  ): Promise<any> {
+    return this.sendMail(
+      to,
+      title,
+      this.helpers.mailTemplate.signup.default(code)
+    );
+  }
+
+  /** @protected */
   protected sendResetPasswordCodeByMail(
     to: string,
     title: string,
     code: string
   ): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.helpers
-        .mail()
-        .to(to)
-        .subject(title)
-        .htmlContent(this.helpers.mailTemplate.notConnected.resetPassword(code))
-        .send((error, info) => {
-          if (error) {
-            reject(error);
-          }
-          resolve(info);
-        });
-    });
+    return this.sendMail(
+      to,
+      title,
+      this.helpers.mailTemplate.notConnected.resetPassword(code)
+    );
   }
 
   /** @protected */
