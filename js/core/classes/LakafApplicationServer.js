@@ -11,6 +11,7 @@ const LakafRealtimeApplication_1 = __importDefault(require("./LakafRealtimeAppli
 class LakafApplicationServer extends LakafAbstract_1.default {
     constructor(system, socketRouting) {
         super();
+        /** @private */
         this.statusServer = false;
         this.port = env_1.default.PORT;
         this.host = env_1.default.HOST;
@@ -19,6 +20,10 @@ class LakafApplicationServer extends LakafAbstract_1.default {
             this.socketRouting = socketRouting;
         }
     }
+    /**
+     * @param {{ key: any; cert: any; }} param0
+     * @returns { void }
+     */
     start({ key, cert }) {
         this.system.app.set("port", this.port);
         if (!key ||
@@ -39,19 +44,30 @@ class LakafApplicationServer extends LakafAbstract_1.default {
         this.server.listen(this.port, this.host);
         this.statusServer = true;
     }
+    /**
+     * @returns { void }
+     */
     stop() {
         if (this.statusServer) {
             this.server.close((err) => {
-                console.log("Something is wrong when closing server");
-                console.log("Message : \n");
-                console.log(err.message);
-                console.log("Name : \n");
-                console.log(err.name);
-                console.log("Stack : \n");
-                console.log(err.stack);
+                if (err) {
+                    console.log("Something is wrong when closing server");
+                    console.log("Message : \n");
+                    console.log(err.message);
+                    console.log("Name : \n");
+                    console.log(err.name);
+                    console.log("Stack : \n");
+                    console.log(err.stack);
+                    return;
+                }
+                console.log("Server is closed.");
             });
         }
     }
+    /**
+     * @param {{ key: any; cert: any; }} param0
+     * @returns { void }
+     */
     refresh({ key, cert }) {
         if (!this.statusServer) {
             console.log("Server was not started !");
@@ -65,7 +81,7 @@ class LakafApplicationServer extends LakafAbstract_1.default {
     get app() {
         return this.system;
     }
-    /** @private */
+    /** @private @returns { void } */
     registerAsRTAServer() {
         if (!this.socketRouting) {
             console.log("No socket routing provided");

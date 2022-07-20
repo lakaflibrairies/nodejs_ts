@@ -8,6 +8,7 @@ const LakafStaticEmitter_1 = __importDefault(require("./LakafStaticEmitter"));
 class LakafAbstract extends LakafStaticEmitter_1.default {
     constructor() {
         super(...arguments);
+        /** @readonly @type { typeof helpers } */
         this.helpers = index_1.default;
     }
 }

@@ -61,6 +61,23 @@ export default class LakafBaseService extends LakafAbstract {
     });
   }
 
+  /**
+   * @protected
+   * @param { string } to
+   * @param { string } title
+   * @param { string } htmlContent
+   *
+   * @returns { Promise<any> }
+   */
+   protected sendSMS(
+    to: number,
+    payload: Record<"title" | "body", string | number>
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      resolve({ message: "Feature not available." })
+    });
+  }
+
   /** @protected */
   protected sendCodeByMail(
     to: string,

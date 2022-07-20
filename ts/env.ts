@@ -1,12 +1,12 @@
 import { EnvTemplate } from "./core/types";
-import { findProcessModeFromCommand } from "./core/utils";
+import { findProcessModeFromCommand, requireUncached } from "./core/utils";
 import path from "path";
 
 const isProduction = findProcessModeFromCommand() === "production";
 
 const projectFolder = path.resolve(__dirname, "../../../../"); // This path is calculated from this env file.
 
-const projectEnv = require(projectFolder + "/env") as EnvTemplate;
+const projectEnv = requireUncached(projectFolder + "/env") as EnvTemplate;
 
 const defaultEnv: EnvTemplate = {
   PORT: isProduction ? 3030 : 12400,
@@ -40,8 +40,8 @@ const defaultEnv: EnvTemplate = {
   jwtKey: "*€$/sfgfrsfs~super_salt~45646846",
   clientUrl: isProduction ? "https://www.client-domain.ext" : "http://localhost:8080",
   logConfig: {
-    extension: "json",
-    logsFolder: "", // logsFolder: path.resolve(__dirname, "logs") This is an example value. In this case, __dirname represents a folder that to use for save logs
+    extension: "txt",
+    logsFolder: path.resolve(projectFolder, "logs"), // logsFolder: path.resolve(__dirname, "logs") This is an example value. In this case, __dirname represents a folder that to use for save logs
     showInConsole: false
   },
   storageConfig: {

@@ -5,8 +5,8 @@ import LakafAbstract from "./LakafAbstract";
 import env from "../../env";
 
 export default class LakafApplication extends LakafAbstract {
-  /** @readonly */
-  readonly application: Express;
+  /** @private @readonly */
+  private readonly application: Express;
 
   constructor(config: Config = env.config) {
     super();

@@ -176,7 +176,7 @@ export default class LakafRouting extends LakafAbstract {
 
   constructor() {
     super();
-    this.router = Router();
+    this.router = Router({ mergeParams: true });
   }
 
   _get(

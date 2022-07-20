@@ -71,6 +71,19 @@ class LakafBaseService extends LakafAbstract_1.default {
             });
         });
     }
+    /**
+     * @protected
+     * @param { string } to
+     * @param { string } title
+     * @param { string } htmlContent
+     *
+     * @returns { Promise<any> }
+     */
+    sendSMS(to, payload) {
+        return new Promise((resolve, reject) => {
+            resolve({ message: "Feature not available." });
+        });
+    }
     /** @protected */
     sendCodeByMail(to, title, code) {
         return this.sendMail(to, title, this.helpers.mailTemplate.signup.default(code));

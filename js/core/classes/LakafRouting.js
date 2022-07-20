@@ -167,7 +167,7 @@ const LakafNotFoundController_1 = __importDefault(require("./LakafNotFoundContro
 class LakafRouting extends LakafAbstract_1.default {
     constructor() {
         super();
-        this.router = express_1.Router();
+        this.router = express_1.Router({ mergeParams: true });
     }
     _get(brick, middlewares, controller) {
         this.router.get(brick, ...middlewares, controller);

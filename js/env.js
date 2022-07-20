@@ -7,7 +7,7 @@ const utils_1 = require("./core/utils");
 const path_1 = __importDefault(require("path"));
 const isProduction = utils_1.findProcessModeFromCommand() === "production";
 const projectFolder = path_1.default.resolve(__dirname, "../../../../"); // This path is calculated from this env file.
-const projectEnv = require(projectFolder + "/env");
+const projectEnv = utils_1.requireUncached(projectFolder + "/env");
 const defaultEnv = {
     PORT: isProduction ? 3030 : 12400,
     HOST: "localhost",
@@ -39,8 +39,8 @@ const defaultEnv = {
     jwtKey: "*€$/sfgfrsfs~super_salt~45646846",
     clientUrl: isProduction ? "https://www.client-domain.ext" : "http://localhost:8080",
     logConfig: {
-        extension: "json",
-        logsFolder: "",
+        extension: "txt",
+        logsFolder: path_1.default.resolve(projectFolder, "logs"),
         showInConsole: false
     },
     storageConfig: {

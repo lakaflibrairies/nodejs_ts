@@ -1,6 +1,6 @@
 {
   "name": "@van_lakaf/nodejs_ts",
-  "version": "1.0.5",
+  "version": "1.06",
   "description": "Framework nodejs + typescript permettant de développer des applications js côté serveur.",
   "scripts": {
     "compile": "tsc --watch"

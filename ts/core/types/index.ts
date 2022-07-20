@@ -2,6 +2,10 @@ import { NextFunction, Request, Response } from "express";
 import LakafRouting from "../classes/LakafRouting";
 import { Socket } from "socket.io";
 
+export interface ExtendedGlobal extends NodeJS.Global {
+  [key: string]: any
+};
+
 type IndexSignature = string | number;
 
 export type Json = {
@@ -121,7 +125,7 @@ export type MailConfig = {
 export type LogConfig = {
   logsFolder: string;
   showInConsole: boolean;
-  extension: string;
+  extension: "json" | "txt";
 };
 
 export type StorageConfig = {

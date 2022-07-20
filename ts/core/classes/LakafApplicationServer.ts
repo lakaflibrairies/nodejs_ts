@@ -7,12 +7,18 @@ import LakafRealtimeApplication from "./LakafRealtimeApplication";
 import LakafSocketRouting from "./LakafSocketRouting";
 
 export default class LakafApplicationServer extends LakafAbstract {
+  /** @private @readonly */
   private readonly port: number;
+  /** @readonly */
   readonly system: LakafApplication;
+  /** @private @readonly */
   private readonly host: string;
+  /** @private */
   private server: http.Server | https.Server;
+  /** @private */
   private statusServer: boolean = false;
   realtime: LakafRealtimeApplication;
+  /** @private */
   private socketRouting: LakafSocketRouting<Record<string, any>>;
 
   constructor(
@@ -28,6 +34,10 @@ export default class LakafApplicationServer extends LakafAbstract {
     }
   }
 
+  /**
+   * @param {{ key: any; cert: any; }} param0 
+   * @returns { void }
+   */
   start({ key, cert }: { key?: any; cert?: any }): void {
     this.system.app.set("port", this.port);
     if (
@@ -52,20 +62,31 @@ export default class LakafApplicationServer extends LakafAbstract {
     this.statusServer = true;
   }
 
+  /**
+   * @returns { void }
+   */
   stop(): void {
     if (this.statusServer) {
       this.server.close((err) => {
-        console.log("Something is wrong when closing server");
-        console.log("Message : \n");
-        console.log(err.message);
-        console.log("Name : \n");
-        console.log(err.name);
-        console.log("Stack : \n");
-        console.log(err.stack);
+        if (err) {
+          console.log("Something is wrong when closing server");
+          console.log("Message : \n");
+          console.log(err.message);
+          console.log("Name : \n");
+          console.log(err.name);
+          console.log("Stack : \n");
+          console.log(err.stack);
+          return;
+        }
+        console.log("Server is closed.")
       });
     }
   }
 
+  /**
+   * @param {{ key: any; cert: any; }} param0 
+   * @returns { void }
+   */
   refresh({ key, cert }: { key?: any; cert?: any }): void {
     if (!this.statusServer) {
       console.log("Server was not started !");
@@ -80,7 +101,7 @@ export default class LakafApplicationServer extends LakafAbstract {
     return this.system;
   }
 
-  /** @private */
+  /** @private @returns { void } */
   private registerAsRTAServer(): void {
     if (!this.socketRouting) {
       console.log("No socket routing provided");
